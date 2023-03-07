@@ -22,6 +22,10 @@ public class ServletOverview extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/UserHome.jsp").forward(request, response);
             }
         }
+        else {
+            request.setAttribute(Status.PERMISSION_DENIED.toString(), "You do not have permission to view this page");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
     }
 
     @Override

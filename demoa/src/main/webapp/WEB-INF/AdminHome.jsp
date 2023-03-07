@@ -1,16 +1,16 @@
-
 <%--
   Created by IntelliJ IDEA.
   User: magnu
   Date: 07/03/2023
-  Time: 15.31
+  Time: 17.36
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Home</title>
+    <title>Admin Home</title>
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,29 +30,30 @@
     </nav>
 </header>
 <body>
-    <div class="container">
-        <h1 class="alert-danger">${requestScope.INTERNAL_SERVER_ERROR}</h1>
-        <%--Get the current users info from context--%>
-        <h2>Username: ${sessionScope.user.getName()}</h2>
-<%--        <form name="logout" action="ServletLogout" method="get">--%>
-<%--            <input type="submit" value="Logout" name="logout">--%>
-<%--        </form>--%>
-        <br>
-        <br>
-        <label class="alert-danger">${requestScope.PASSWORD_ATTEMPTED_CHANGE}</label>
-        <form name="changePassword" action="ServletChangePassword" method="get">
-            <label for="newPassword">Change password: </label>
-            <br>
-            <input type="password" id="newPassword" name="newPassword">
-            <br>
-            <br>
-            <input type="submit" value="Change password" name="changePassword">
-        </form>
-        <br>
-        <label>${requestScope.PERMISSION_DENIED}</label>
-        <form name="overview" action="ServletOverview" method="get">
-            <input type="submit" value="Go to overview" name="gotoOverview">
-        </form>
+<c:if test="${requestScope.user != null}">
+    <c:if test="${requestScope.user.getRole() != 'admin'}">
+        <h1>Access denied</h1>
+    </c:if>
+</c:if>
+<div class="container">
+<h1>Welcome to the administrative page ${requestScope.user.getName()}!</h1>
+
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <table class="table-responsive-sm table-bordered">
+            <tr class="table-bordered">
+                <th>Users</th>
+                <th>Delete</th>
+            </tr>
+            <c:forEach var="user" items="${applicationScope.users}">
+                <tr>
+                    <td>${user.value.getName()}</td>
+                    <td><a href="ServletDeleteUser?id=${user.value.getName()}">Delete</a></td>
+                </tr>
+            </c:forEach>
+        </table>
     </div>
+    <div class="col-sm-2"></div>
+</div>
 </body>
 </html>

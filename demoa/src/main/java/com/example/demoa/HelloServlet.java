@@ -25,7 +25,7 @@ public class HelloServlet extends HttpServlet {
             Users.put(("User" + i).toLowerCase(), new User("User" + i, "Password"));
         }
 
-        getServletContext().setAttribute("Users", Users);
+        getServletContext().setAttribute("users", Users);
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -39,8 +39,8 @@ public class HelloServlet extends HttpServlet {
             String name = request.getParameter("name").toLowerCase();
             String password = request.getParameter("password");
 
-            if (getServletContext().getAttribute("Users") instanceof HashMap) {
-                Map<String, User> Users = (HashMap<String, User>) getServletContext().getAttribute("Users");
+            if (getServletContext().getAttribute("users") instanceof HashMap) {
+                Map<String, User> Users = (HashMap<String, User>) getServletContext().getAttribute("users");
                 if (Users.containsKey(name) && Users.get(name).getPassword().equals(password)) {
                     request.setAttribute("user", Users.get(name));
                     request.getSession().setAttribute("user", Users.get(name));
