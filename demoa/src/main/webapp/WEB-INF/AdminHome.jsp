@@ -48,7 +48,7 @@
             <c:forEach var="user" items="${applicationScope.users}">
                 <tr>
                     <td>${user.value.getName()}</td>
-                    <td><a href="ServletDeleteUser?id=${user.value.getName()}">Delete</a></td>
+                    <td><a href="ServletDeleteUser?username=${user.value.getName()}">Delete</a></td>
                 </tr>
             </c:forEach>
         </table>
