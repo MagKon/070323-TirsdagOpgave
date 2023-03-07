@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: magnu
@@ -12,7 +13,17 @@
 </head>
 <body>
 <%--Get the current users info from context--%>
-<label>Username: ${requestScope.user.getPassword()}</label>
-${requestScope}
+<label>Username: ${sessionScope.user.getName()}</label>
+<form name="logout" action="ServletLogout" method="get">
+    <input type="submit" value="Logout" name="logout">
+</form>
+<br>
+<form name="changePassword" action="ServletChangePassword" method="get">
+    <input type="submit" value="Change password" name="changePassword">
+</form>
+<br>
+<form name="overview" action="ServletOverview" method="get">
+    <input type="submit" value="Go to overview" name="gotoOverview">
+</form>
 </body>
 </html>

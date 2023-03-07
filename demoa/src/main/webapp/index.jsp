@@ -9,11 +9,11 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="hello-servlet">Run servlet test</a>
+<a href="Home">Home page</a>
 <br>
 <br>
 <label>${requestScope.NOT_FOUND}</label>
-<form action="hello-servlet" class="" method="get">
+<form action="Home" class="" method="get">
     <label for="name">Name:</label>
     <br>
     <input type="text" id="name" name="name" placeholder="Enter your name">
