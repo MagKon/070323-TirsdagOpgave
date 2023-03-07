@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="demoa" target="1.8" />
+      <module name="demoa" target="19" />
     </bytecodeTargetLevel>
   </component>
 </project>
