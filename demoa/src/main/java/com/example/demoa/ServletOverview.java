@@ -2,6 +2,7 @@ package com.example.demoa;
 
 import com.example.demoa.Entity.User;
 import com.example.demoa.Enums.Permission;
+import com.example.demoa.Enums.Status;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -17,6 +18,7 @@ public class ServletOverview extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/AdminHome.jsp").forward(request, response);
             }
             else {
+                request.setAttribute(Status.PERMISSION_DENIED.toString(), "You do not have permission to view this page");
                 request.getRequestDispatcher("WEB-INF/UserHome.jsp").forward(request, response);
             }
         }

@@ -22,6 +22,7 @@
     <input type="submit" value="Change password" name="changePassword">
 </form>
 <br>
+<label>${requestScope.PERMISSION_DENIED}</label>
 <form name="overview" action="ServletOverview" method="get">
     <input type="submit" value="Go to overview" name="gotoOverview">
 </form>
