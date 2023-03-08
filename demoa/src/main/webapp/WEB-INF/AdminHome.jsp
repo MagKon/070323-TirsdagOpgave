@@ -54,6 +54,32 @@
         </table>
     </div>
     <div class="col-sm-2"></div>
+    <br>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2">
+            <h3>${requestScope.USER_ADD_ATTEMPTED}</h3>
+            <form action="ServletAddUser" method="get">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <div class="mb-3">
+                    <label for="permission" class="form-label">Role</label>
+                    <select class="form-select" aria-label="Default select example" name="permission" id="permission">
+                        <option value="USER">User</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-sm-8"></div>
+    </div>
 </div>
 </body>
 </html>

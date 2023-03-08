@@ -2,6 +2,7 @@ package com.example.demoa;
 
 import com.example.demoa.Entity.User;
 import com.example.demoa.Enums.Permission;
+import com.example.demoa.Enums.Status;
 
 import java.io.*;
 import java.util.HashMap;
@@ -49,6 +50,7 @@ public class HelloServlet extends HttpServlet {
                     request.getRequestDispatcher("WEB-INF/UserHome.jsp").forward(request, response);
                     destroy();
                 } else {
+                    Map<String, Object> attributes = new HashMap<>();
                     request.setAttribute(NOT_FOUND.toString(), "User not found");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
@@ -60,4 +62,44 @@ public class HelloServlet extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        addUser(request, response);
+    }
+
+    public void addUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (getServletContext().getAttribute("users") instanceof Map) {
+            Map<String, User> Users = (Map<String, User>) getServletContext().getAttribute("users");
+            String username = request.getParameter("newname");
+            String password = request.getParameter("newpassword");
+            String confirmPassword = request.getParameter("confirmpassword");
+            Permission permission = null;
+
+            if (request.getParameter("permission") != null)
+                permission = Permission.valueOf(request.getParameter("permission"));
+
+            if (!Users.containsKey(username.toLowerCase()) && !username.equalsIgnoreCase("")) {
+                if (!password.contains(" ") && password.length() > 5) {
+                    //Add user to map
+                    Users.put(username.toLowerCase(), new User(username, password, permission));
+                    getServletContext().setAttribute("users", Users);
+
+                    request.setAttribute(Status.USER_ADD_ATTEMPTED.toString(), "User added successfully");
+                }
+                else {
+                    if (password.equals(confirmPassword))
+                        request.setAttribute(Status.USER_ADD_ATTEMPTED.toString(), "Confirm password must be the same as password.");
+                    else
+                        request.setAttribute(Status.USER_ADD_ATTEMPTED.toString(), "Password is invalid. Password must be more than 5 characters long and cannot contain spaces.");
+                }
+            }
+            else {
+                request.setAttribute(Status.USER_ADD_ATTEMPTED.toString(), "User not added. User already exists or username is invalid.");
+            }
+            //Return to page
+            String url = request.getHeader("referer");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+    }
+
 }

@@ -24,24 +24,49 @@
     </nav>
 </header>
 <body>
-<h1><%= "Welcome" %>
-</h1>
-<br/>
-<a href="Home">Home page</a>
-<br>
-<br>
-<label>${requestScope.NOT_FOUND}</label>
-<form action="Home" class="" method="get">
-    <label for="name">Name:</label>
-    <br>
-    <input type="text" id="name" name="name" placeholder="Enter your name">
-    <br>
-    <label for="password">Password:</label>
-    <br>
-    <input type="text" id="password" name="password" placeholder="Enter your password">
+<div class="container">
+    <h1><%= "Welcome" %>
+    </h1>
+    <br/>
+    <a href="Home">Home page</a>
     <br>
     <br>
-    <input type="submit" value="Submit">
-</form>
+    <div class="row">
+        <label>${requestScope.NOT_FOUND}</label>
+        <form action="Home" class="" method="get">
+            <label for="name">Name:</label>
+            <br>
+            <input type="text" id="name" name="name" placeholder="Enter your name">
+            <br>
+            <label for="password">Password:</label>
+            <br>
+            <input type="text" id="password" name="password" placeholder="Enter your password">
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <label>${requestScope.USER_ADD_ATTEMPTED}</label>
+        <form action="Home" class="" method="post">
+            <label for="newname">Name:</label>
+            <br>
+            <input type="text" id="newname" name="newname" placeholder="Enter your name">
+            <br>
+            <label for="newpassword">Password:</label>
+            <br>
+            <input type="text" id="newpassword" name="newpassword" placeholder="Enter your password">
+            <br>
+            <label for="confirmpassword">Confirm Password:</label>
+            <br>
+            <input type="text" id="confirmpassword" name="confirmpassword" placeholder="Enter your password">
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
 </body>
 </html>
