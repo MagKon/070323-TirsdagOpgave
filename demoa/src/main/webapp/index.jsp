@@ -49,6 +49,7 @@
     <br>
     <br>
     <div class="row">
+        <h3>Make a new user</h3>
         <label>${requestScope.USER_ADD_ATTEMPTED}</label>
         <form action="Home" class="" method="post">
             <label for="newname">Name:</label>

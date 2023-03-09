@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -49,10 +50,24 @@
             <input type="submit" value="Change password" name="changePassword">
         </form>
         <br>
-        <label>${requestScope.PERMISSION_DENIED}</label>
-        <form name="overview" action="ServletOverview" method="get">
-            <input type="submit" value="Go to overview" name="gotoOverview">
-        </form>
+        <br>
+        <div class="row">
+            <label class="alert-danger">${requestScope.USER_ITEM_ADD_ATTEMPTED}</label>
+            <label class="fst-italic text-sm-start">*to remove an item, simply delete it and update the list</label>
+            <form action="ServletAddItemToUser" method="get">
+                <c:forEach var="item" items="${sessionScope.user.getTodoList()}">
+                    <input type="text" name="${sessionScope.user.getTodoList().indexOf(item)}" id="${sessionScope.user.getTodoList().indexOf(item)}" value="${item}"><br>
+                </c:forEach>
+                <input type="text" name="newItem" id="-1" placeholder="New Item">
+                <br>
+                <br>
+                <input type="submit" name="submit" id="submit" value="Update list">
+            </form>
+        </div>
+<%--        <label>${requestScope.PERMISSION_DENIED}</label>--%>
+<%--        <form name="overview" action="ServletOverview" method="get">--%>
+<%--            <input type="submit" value="Go to overview" name="gotoOverview">--%>
+<%--        </form>--%>
     </div>
 </body>
 </html>
